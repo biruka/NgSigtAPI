@@ -1,7 +1,10 @@
 using System;
-using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Web;
+using Microsoft.AspNetCore.Cors;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NgSight.API;
 using NgSight.API.Models;
@@ -9,6 +12,8 @@ using NgSight.API.Models;
 namespace NgSight.API.Controllers
 {
     [Route("api/[controller]")]
+    [ApiController]
+    [EnableCors("CorsPolicy")]
     public class OrderController : Controller
     {
         private readonly NgSightDBContext _ctx;

@@ -21,13 +21,14 @@ namespace NgSight.API
 
         public Startup(IConfiguration configuration)  => this.Configuration = configuration;
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        // This method gets called by the runtime. Use this method to add services to the container.fo       
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors(opt => {
                 opt.AddPolicy("CorsPolicy",
                 c => c.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             });
+            //services.AddCors();
             services.AddDbContext<NgSightDBContext>(opt => opt.UseSqlServer(this.Configuration["Data:NgSightAPI:ConnectionString"]));
             services.AddMvc(options => options.EnableEndpointRouting=false).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddTransient<DataSeed>();
@@ -42,13 +43,9 @@ namespace NgSight.API
                 app.UseDeveloperExceptionPage();
                 app.UseCors("CorsPolicy");
             }
-
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
-            seed.SeedData(20,1000);
-
+            //seed.SeedData(20,1000);
             app.UseMvc(routes=> routes.MapRoute(
                 "default", "api/{controller}/{action}/{id}"
             ));
@@ -58,7 +55,7 @@ namespace NgSight.API
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-            });
+            }); 
         }
     }
 }

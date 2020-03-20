@@ -1,11 +1,15 @@
 using System;
 using System.Linq;
+using Microsoft.AspNetCore.Cors;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NgSight.API.Models;
 namespace NgSight.API.Controllers
 {
+    [EnableCors("CorsPolicy")]
     [Route("api/[controller]")]
+    [ApiController]
     public class CustomerController : Controller
     {
         private readonly NgSightDBContext _ctx;
